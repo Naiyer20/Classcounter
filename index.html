@@ -1,7 +1,254 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
+    
+    
+    <style>
+    body {
+    background-color: #222227;
+}
+
+
+
+.banner-area {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 100%;
+    height: 10%;
+    position: center;
+    top: 100px;
+    background-image: url("Image/banner.JPG");
+    background-size: cover;
+    background-position: center center;
+}
+
+    .banner-area p {
+        font-size: 50px;
+        font-family: 'Comic Sans MS';
+        text-transform: uppercase;
+        color: #fff;
+        text-align: center;
+    }
+
+
+
+.tabtr ul li {
+    cursor: pointer;
+    background-color: black;
+    border-bottom: 1px solid black;
+    flex-grow: 1;
+    text-align: center;
+    font-family: 'Lucida Console';
+    color: white;
+}
+
+.label {
+    position: relative;
+    display: block;
+    padding: 10px 0px;
+    cursor: pointer;
+}
+
+.t-c {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -100000px;
+    margin: 0;
+    z-index: -100;
+    padding: 10px 0px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.t-c input:checked + .content {
+    display: block;
+}
+
+
+.ts {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.t:hover {
+    background-color: #9ce2fc;
+    color: black;
+}
+
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    background-color: #12121f;
+    color: #eee;
+    display: flex;
+    justify-content: left;
+}
+
+.calendar {
+    width: 45rem;
+    height: 52rem;
+    background-color: #222227;
+    box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
+}
+
+.month {
+    width: 100%;
+    height: 12rem;
+    background-color: #167e56;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    text-align: center;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+    .month i {
+        font-size: 2.5rem;
+        cursor: pointer;
+    }
+
+    .month h1 {
+        font-size: 3rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .month p {
+        font-size: 1.6rem;
+    }
+button {
+    font-size: 1.4rem;
+    width: calc(40.2rem / 7);
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+    transition: background-color 0.2s;
+    background-color: inherit;
+    border: none;
+    color: white;
+    padding: 10px;
+    outline: none;
+}
+    .weekdays {
+        width: 100%;
+        height: 5rem;
+        padding: 0 0.4rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .weekdays div {
+        font-size: 1.5rem;
+        font-weight: 400;
+        letter-spacing: 0.1rem;
+        width: calc(44.2rem / 7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+    }
+
+.days {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.2rem;
+}
+
+    .days div {
+        font-size: 1.4rem;
+        margin: 0.3rem;
+        width: calc(40.2rem / 7);
+        height: 5.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+        transition: background-color 0.2s;
+    }
+
+        .days div:hover:not(.today) {
+            background-color: #262626;
+            border:  solid white;
+            cursor:pointer
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.prev-date,
+.next-date {
+    opacity: 0.5;
+}
+
+.today {
+    background-color: #167e56;
+}
+
+.fa, .fab, .fad, .fal, .far, .fas {
+    font-family: "Font Awesome 5 Free" 
+        font-weight: 900 -moz-osx-
+        font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    
+   
+    text-rendering: auto;
+    line-height: 1
+}
+
+
+
+
+
+
+    </style>
+        
+        
     <meta charset="utf-8" />
 
     <script src="Script.js" defer></script>
