@@ -95,9 +95,10 @@ document.querySelector(".next").addEventListener("click", () => {
 });
 
 renderCalendar();
-
+console.log("after renderCalendar();")
 
 function dofirst() {
+    console.log("dofirst")
     var button = document.getElementById("ayo");
     button.addEventListener("click", save, false);
     display();
