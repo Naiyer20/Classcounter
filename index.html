@@ -280,7 +280,7 @@ button {
     <div class="container">
         <div class="calendar">
             <div class="month">
-                <i class="fas prev">Previous</i>
+                <i id="ayo" class="fas prev">Previous</i>
                 <div class="date">
                     <h1></h1>
                     <p></p>
@@ -299,9 +299,30 @@ button {
             <div class="days"></div>
 
         </div>
-        <div class="daytoedit">
+          <div id="a" class="daytoedit">
 
         </div>
+        <div id="b">
+            hi
+        </div>
+
+        <div>
+
+            <form class="form-horizontal well">
+                <legend>
+                    <h3>
+                        <div id="title"></div>
+                    </h3>
+                </legend>
+                <fieldset>
+                    <label for="csvFileInput">
+                        <strong>CSV File:</strong>
+                    </label>
+                    <input type="file" id="csvFileInput" onchange="handleFiles(this.files)"
+                           accept=".csv">
+        
+        </fieldset>
+        </form>
     </div>
 </body>
 </html>
