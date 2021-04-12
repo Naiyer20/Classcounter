@@ -131,7 +131,7 @@ function display() {
 
     console.log("display")
 }
-window.addEventListener("load", dofirst, false);
+dofirst();
 
 
 
