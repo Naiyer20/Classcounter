@@ -97,3 +97,39 @@ document.querySelector(".next").addEventListener("click", () => {
 renderCalendar();
 
 
+function dofirst() {
+    var button = document.getElementById("ayo");
+    button.addEventListener("click", save, false);
+    display();
+}
+
+function save() {
+    var key = "date editing";
+    var tosave = l
+    sessionStorage.setItem(key,tosave);
+
+    console.log(key, tosave);
+    console.log(sessionStorage.getItem(key));
+    console.log(sessionStorage.length);
+    console.log("save");
+
+    display();
+
+}
+
+function display() {
+    var areatooutput = document.getElementById("b");
+    b.innerHTML = "";
+    for (var x = 0; x < sessionStorage.length; x++) {
+        var a = sessionStorage.key(x);
+        var getsave = sessionStorage.getItem(a)
+        b.innerHTML += "" + "" + getsave
+        console.log(getsave)
+    }
+
+    console.log("display")
+}
+window.addEventListener("load", dofirst, false);
+
+
+
