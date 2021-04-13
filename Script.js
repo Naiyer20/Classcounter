@@ -1,18 +1,33 @@
-// JavaScript source code
+// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyALWFDUJixzYMAq7hMVQDKZ6SaG42dwPo4",
+    authDomain: "classcounter.firebaseapp.com",
+    databaseURL: "https://classcounter-default-rtdb.firebaseio.com",
+    projectId: "classcounter",
+    storageBucket: "classcounter.appspot.com",
+    messagingSenderId: "845077401888",
+    appId: "1:845077401888:web:4d6a56a0c74692f0984745"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var database = firebase.database();
+
+
 // JavaScript source code
 const date = new Date();
 
-const renderCalendar = () => {date.setDate(1);
+const renderCalendar = () => {
+    date.setDate(1);
 
     const monthDays = document.querySelector(".days");
-   
 
-    const lastDay = new Date( date.getFullYear(),date.getMonth() + 1, 0).getDate();
-    const prevLastDay = new Date(date.getFullYear(),date.getMonth(),0).getDate();
+
+    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
     const firstDayIndex = date.getDay();
     const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
     const nextDays = 7 - lastDayIndex - 1;
-   
+
 
 
 
@@ -34,7 +49,7 @@ const renderCalendar = () => {date.setDate(1);
         "December",
     ];
 
-    document.querySelector(".date h1").innerHTML = months[date.getMonth()];
+    document.querySelector(".date h1").innerHTML = months[date.getMonth()] + " " + date.getFullYear();
 
     document.querySelector(".date p").innerHTML = new Date().toDateString();
 
@@ -45,37 +60,37 @@ const renderCalendar = () => {date.setDate(1);
     }
 
     for (let i = 1; i <= lastDay; i++) {
-        if (
-            i === new Date().getDate() &&
-            date.getMonth() === new Date().getMonth()
-        ) {
+        if (i == new Date().getDate() && date.getMonth() == new Date().getMonth() && date.getYear() == new Date().getYear()) {
+            console.log(i);
             days += `<div class="today"><button class="d${i}/${date.getMonth()}/${date.getFullYear()}" onclick="clicked( ${i}_${date.getMonth()}_${date.getFullYear()} ) "> <p>${i}</p> </button></div>`;
         } else {
-         //  days += `<div>${i}</div>`;
+            //  days += `<div>${i}</div>`;
             days += `<div><button class="d${i}/${date.getMonth()}/${date.getFullYear()}" onclick="clicked( ${i},${date.getMonth()},${date.getFullYear()} ) "> <p>${i}</p> </button></div>`;
 
-         
+
 
         }
     }
 
-    for (let j = 1; j <= nextDays+1; j++) {
+    for (let j = 1; j <= nextDays + 1; j++) {
         days += `<div class="next-date">${j}</div>`;
-       
+
         monthDays.innerHTML = days;
     }
 };
 
 
-
+document.querySelector(".selectionhide").style.display="none";
 var l
 const daytoedi = document.querySelector(".daytoedit");
-function clicked(d,m,y)
-{
+
+function clicked(d, m, y) {
     l = d + "" + m + "" + y + "";
-    daytoedi.innerHTML = `<div id = "c">You are editing this date : ${d}/${m}/${y}</div>` ;
-  
+    daytoedi.innerHTML = `<div id = "c">You are editing this date : ${d}/${m}/${y}</div>`;
+    document.querySelector(".selectionhide").style.display="block";
 }
+const n = document.querySelector(".name");
+n.innerHTML = `<div >You are currently logged in as : ${name}</div>`;
 
 
 
@@ -85,6 +100,9 @@ function clicked(d,m,y)
 
 
 
+function savetext(x) {
+    console.log(x)
+}
 
 
 document.querySelector(".prev").addEventListener("click", () => {
@@ -99,144 +117,109 @@ document.querySelector(".next").addEventListener("click", () => {
 
 renderCalendar();
 
-function dofirst() {
-    var button = document.getElementById("ayo");
-    button.addEventListener("click", save, false);
-    display();
-}
 
-function save() {
-    var key = "date editing";
-    var tosave = l
-    sessionStorage.setItem(key,tosave);
+var name = "";
+//create
+btn = document.getElementById("signin");
+btnc = document.getElementById("btnc");
+btnc.addEventListener("click", () => {
+    
+    input = document.getElementById("btnt").value;
+    var b = 0;
+    if (input != "") {
+        var dbref = firebase.database().ref().child('Users/' + input);
+        dbref.on('value', (snapshot) => {
+           
+            const data = snapshot.val();
+            console.log(data)
+            if (data != null&&b==0) {
+                document.getElementById("alert").style.display = "block";
+                p = document.getElementById("alertmessage");
+                p.innerHTML = "This name already exist";
 
-    console.log(key, tosave);
-    console.log(sessionStorage.getItem(key));
-    console.log(sessionStorage.length);
-    console.log("save");
+            } else {
+                b=1;
+                document.getElementById("sinin").style.display = "none";
+                document.getElementById("container").style.display = "flex";
+                console.log(input)
+                name = input;
+                
+                firebase.database().ref('Users/' + input).set({
+                    MissedClasses: "",
+                    happpenClasses:"",
+                    Price:""
+                });
+                
+            }
 
-    display();
-
-}
-
-function display() {
-    var areatooutput = document.getElementById("b");
-    b.innerHTML = "";
-    for (var x = 0; x < sessionStorage.length; x++) {
-        var a = sessionStorage.key(x);
-        var getsave = sessionStorage.getItem(a)
-        b.innerHTML += "" + "" + getsave
-        console.log(getsave)
-    }
-
-    console.log("display")
-}
-dofirst();
-
-
-
-
-
-/*
-function handleFiles(files) {
-    // Check for the various File API support.
-    if (window.FileReader) {
-        // FileReader are supported.
-        getAsText(files[0]);
-    } else {
-        alert('FileReader are not supported in this browser.');
-    }
-}
-
-function getAsText(fileToRead) {
-    var reader = new FileReader();
-    // Handle errors load
-    reader.onload = loadHandler;
-    reader.onerror = errorHandler;
-    // Read file into memory as UTF-8      
-    reader.readAsText(fileToRead);
-}
-
-function loadHandler(event) {
-    var csv = event.target.result;
-    processData(csv);
-}
-
-function processData(csv) {
-    var allTextLines = csv.split(/\r\n|\n/);
-    var lines = [];
-    while (allTextLines.length) {
-        lines.push(allTextLines.shift().split(','));
-    }
-    console.log(lines);
-    drawOutput(lines);
-}
-
-//if your csv file contains the column names as the first line
-function processDataAsObj(csv) {
-    var allTextLines = csv.split(/\r\n|\n/);
-    var lines = [];
-
-    //first line of csv
-    var keys = allTextLines.shift().split(',');
-
-    while (allTextLines.length) {
-        var arr = allTextLines.shift().split(',');
-        var obj = {};
-        for (var i = 0; i < keys.length; i++) {
-            obj[keys[i]] = arr[i];
-        }
-        lines.push(obj);
-    }
-    console.log(lines);
-    drawOutputAsObj(lines);
-}
-
-function errorHandler(evt) {
-    if (evt.target.error.name == "NotReadableError") {
-        alert("Canno't read file !");
-    }
-}
-
-function drawOutput(lines) {
-    //Clear previous data
-    document.getElementById("output").innerHTML = "";
-    var table = document.createElement("table");
-    for (var i = 0; i < lines.length; i++) {
-        var row = table.insertRow(-1);
-        for (var j = 0; j < lines[i].length; j++) {
-            var firstNameCell = row.insertCell(-1);
-            firstNameCell.appendChild(document.createTextNode(lines[i][j]));
-        }
-    }
-    document.getElementById("output").appendChild(table);
-}
-
-//draw the table, if first line contains heading
-function drawOutputAsObj(lines) {
-    //Clear previous data
-    document.getElementById("output").innerHTML = "";
-    var table = document.createElement("table");
-
-    //for the table headings
-    var tableHeader = table.insertRow(-1);
-    Object.keys(lines[0]).forEach(function (key) {
-        var el = document.createElement("TH");
-        el.innerHTML = key;
-        tableHeader.appendChild(el);
-    });
-
-    //the data
-    for (var i = 0; i < lines.length; i++) {
-        var row = table.insertRow(-1);
-        Object.keys(lines[0]).forEach(function (key) {
-            var data = row.insertCell(-1);
-            data.appendChild(document.createTextNode(lines[i][key]));
         });
+
+    } else {
+        document.getElementById("alert").style.display = "block";
+        p = document.getElementById("alertmessage");
+        p.innerHTML = "There is no name in the box";
+
     }
-    document.getElementById("output").appendChild(table);
+});
+
+
+//login
+btn.addEventListener("click", () => {
+
+    input = document.getElementById("value").value;
+    var b = 0;
+    if (input != "") {
+        var dbref = firebase.database().ref().child('Users/' + input);
+        dbref.on('value', (snapshot) => {
+            const data = snapshot.val();
+            console.log(data)
+            if (data != null) {
+                document.getElementById("sinin").style.display = "none";
+                document.getElementById("container").style.display = "flex";
+                renderCalendar();
+                console.log(input)
+                name = input;
+
+            } else {
+                document.getElementById("alert").style.display = "block";
+                p = document.getElementById("alertmessage");
+                p.innerHTML = "You put the wrong username";
+
+            }
+
+        });
+
+    } else {
+        document.getElementById("alert").style.display = "block";
+        p = document.getElementById("alertmessage");
+        p.innerHTML = "You put no username, you can create one";
+
+    }
+});
+//selectioner
+const selecto = document.getElementById("mySelect");
+let y = `<option value="none">none`;
+users = [];
+var dbref = firebase.database().ref().child('Users/');
+dbref.once('value', (snapshot) => {
+    snapshot.forEach((childSnapshot) => {
+        var childKey = childSnapshot.key;
+        var childData = childSnapshot.val();
+
+        users.push(childKey);
+
+
+    }); for (i = 0; i < users.length; i++) {
+        y += `<option value="${users[i]}">${users[i]}`
+        selecto.innerHTML = y;
+
+    }
+});
+function select() {
+    var x = document.getElementById("mySelect").value;
+    name = x
+    document.getElementById("sinin").style.display = "none";
+    document.getElementById("container").style.display = "flex";
     
 }
-*/
-
 
