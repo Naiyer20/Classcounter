@@ -12,7 +12,7 @@
     <title></title>
 
 
-    <link rel="stylesheet" href="/Classcounter/css.css"  />
+    <link rel="stylesheet" href="/css.css" />
 
 
 </head>
@@ -78,33 +78,58 @@
 
         </div>
         <div class="editor">
-            <br>
-            <div class="name">
-                You are not logged in please refresh the page
-            </div>
-            <br>
-            <div class="daytoedit">
-                You have not currently selected any dates
-            </div>
-            <br>
-            <div class="selectionhide">
-                <div class="group">
-                    <input type="checkbox" id="ch" />
-                    <label for="ch">Did class happen</label>
-                </div>
-
-                <div class="group">
-                    <input type="checkbox" id="cm" />
-                    <label for="cm">Class was cancelle</label>
+            <div class="editor">
+                <br>
+                Editor
+                <div class="name">
+                    You are not logged in please refresh the page
                 </div>
                 <br>
-                <div class="group">
-                    <div class="textbox">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Price" id="Price">
+                <div class="daytoedit">
+                    You have not currently selected any dates
+                </div>
+                <br>
+                <div class="selectionhide">
+                    <div class="group">
+                        <input type="checkbox" id="ch" onchange="checkcheckbox1()" />
+                        <label for="ch">Did class happen ? </label>
+
+                    </div>
+
+                    <div class="group">
+                        <input type="checkbox" id="cm" onchange="checkcheckbox2()" />
+                        <label for="cm">Was class missed ? </label>
                     </div>
                     <br>
-                    <input type="button" class="btn" value="Save" id="btns">
+                    <div class="group">
+                        Price per class in ₹
+                        <div class="textbox">
+                            <i class="fas fa-user"></i>
+                            <input type="number" placeholder="Price per class" id="price">
+                        </div>
+                        <br>
+                        <input type="button" class="btn" value="Save" id="btns">
+
+                    </div>
+                </div>
+            </div>
+            <div class="viewer">
+                Viewer
+                <br>
+                <div class="g">
+                    <br>
+                    <div> Number of classes attended : </div>
+                    <div id="numberofhappenclasse"></div>
+                </div>
+                <div class="g">
+                    <br>
+                    <div> Number of missed classes : </div>
+                    <div id="numberofmissedclasse"></div>
+                </div>
+                <div class="g">
+                    <br>
+                    <p>Amount to pay in ₹ : </p>
+                    <div id="priceforall"></div>
                 </div>
             </div>
         </div>

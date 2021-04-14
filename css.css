@@ -9,7 +9,7 @@
     height: 10%;
     position: center;
     top: 100px;
-    background-image: url("Classcounter/Image/banner.JPG");
+    background-image: url("Image/banner.jpg");
     background-size: cover;
     background-position: center center;
 }
@@ -54,7 +54,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Quicksand", sans-serif;
+    
 }
 
 html {
@@ -168,6 +168,16 @@ button {
 
 .editor {
     font-size: 2rem;
+    font-family: "Font Awesome 5 Free";
+    padding-left: 10px;
+
+}
+.g{
+    display: flex;
+    padding: 10px;
+}
+.h{
+    padding-left: 10px;
 }
 
 .container {
@@ -205,7 +215,9 @@ textarea {
     -webkit-font-smoothing: antialiased;
     display: inline-block;
     text-rendering: auto;
-    line-height: 1
+    line-height: 1;
+    size:2rem ;
+    font-size:2rem ;
 }
 
 .sinin {
@@ -367,3 +379,10 @@ select {
     border-radius: 50%;
   }
   
+  .name{
+    position: absolute;
+    right: 10px;
+    top:10px;
+    font-size: 2rem;
+
+  }

@@ -11,7 +11,9 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
-
+priced = ""
+cmd = ""
+chd = ""
 
 // JavaScript source code
 const date = new Date();
@@ -61,11 +63,11 @@ const renderCalendar = () => {
 
     for (let i = 1; i <= lastDay; i++) {
         if (i == new Date().getDate() && date.getMonth() == new Date().getMonth() && date.getYear() == new Date().getYear()) {
-            console.log(i);
-            days += `<div class="today"><button class="d${i}/${date.getMonth()}/${date.getFullYear()}" onclick="clicked( ${i}_${date.getMonth()}_${date.getFullYear()} ) "> <p>${i}</p> </button></div>`;
+
+            days += `<div class="today"><button id="${i}/${date.getMonth()}/${date.getFullYear()}" onclick="clicked( ${i},${date.getMonth()},${date.getFullYear()} ) "> <p>${i}</p> </button></div>`;
         } else {
             //  days += `<div>${i}</div>`;
-            days += `<div><button class="d${i}/${date.getMonth()}/${date.getFullYear()}" onclick="clicked( ${i},${date.getMonth()},${date.getFullYear()} ) "> <p>${i}</p> </button></div>`;
+            days += `<div><button id="${i}/${date.getMonth()}/${date.getFullYear()}" onclick="clicked( ${i},${date.getMonth()},${date.getFullYear()} ) "> <p>${i}</p> </button></div>`;
 
 
 
@@ -77,20 +79,107 @@ const renderCalendar = () => {
 
         monthDays.innerHTML = days;
     }
+    //day editing  style
+    if (l != "" && dl.m == date.getMonth() && dl.y == date.getFullYear()) {
+
+        document.getElementById(l).style.background = "blue";
+        document.getElementById(l).style.color = "orange";
+    }
+    //class happende style
+    var cha = chd.split(',');
+    cha.pop(0)
+    cha = cha.filter(el => {
+        return el != null && el != '';
+    });
+
+    if (cha.length != 0) {
+        for (i = 0; i < cha.length; i++) {
+
+
+
+            var la = cha[i].split('/');
+            if (la[1] == date.getMonth() && la[2] == date.getFullYear()) {
+                document.getElementById(cha[i]).style.background = "green";
+                document.getElementById(cha[i]).style.color = "white";
+            }
+
+        }
+    }
+
+    //class missed style
+    var cma = cmd.split(',');
+    cma.pop(0)
+    cma = cma.filter(el => {
+        return el != null && el != '';
+    });
+    if (cma.length != 0) {
+        for (i = 0; i < cma.length; i++) {
+            var la = cma[i].split('/');
+            if (la[1] == date.getMonth() && la[2] == date.getFullYear()) {
+
+                document.getElementById(cma[i]).style.background = "red";
+                document.getElementById(cma[i]).style.color = "black";
+            }
+
+        }
+    }
+   
+    cho = document.getElementById("numberofhappenclasse");
+    cmo = document.getElementById("numberofmissedclasse");
+    priceo = document.getElementById("priceforall");
+    var cha = chd.split(',');
+    cha.pop(0);
+    var cma = cmd.split(',');
+    cma.pop(0);
+    cha = cha.filter(el => {
+        return el != null && el != '';
+    });
+    cma = cma.filter(el => {
+        return el != null && el != '';
+    });
+    k = 0;
+    p = 0;
+    for (i = 0; i < cma.length; i++) {
+        var la = cma[i].split('/');
+        if (la[1] == date.getMonth() && la[2] == date.getFullYear()) {
+            p++
+        }
+
+    }
+
+    for (i = 0; i < cha.length; i++) {
+        var la = cha[i].split('/');
+        if (la[1] == date.getMonth() && la[2] == date.getFullYear()) {
+            k++
+        }
+
+    }
+
+    cho.innerHTML = `<div class="h"> ${k} classes</div>`
+    cmo.innerHTML = `<div class="h"> ${p} classes</div>`
+    priceo.innerHTML = `<div class="h"> ${priced * k} rupees</div>`
+
+
+
+
+   
 };
 
 
-document.querySelector(".selectionhide").style.display="none";
-var l
+document.querySelector(".selectionhide").style.display = "none";
+var l = ""
+var dl;
 const daytoedi = document.querySelector(".daytoedit");
 
 function clicked(d, m, y) {
-    l = d + "" + m + "" + y + "";
-    daytoedi.innerHTML = `<div id = "c">You are editing this date : ${d}/${m}/${y}</div>`;
-    document.querySelector(".selectionhide").style.display="block";
+
+    dl = { d, m, y }
+    l = d + "/" + m + "/" + y + "";
+    daytoedi.innerHTML = `<div id = "c">You are editing this date : ${l}</div>`;
+    document.querySelector(".selectionhide").style.display = "block";
+    renderCalendar();
+
 }
-const n = document.querySelector(".name");
-n.innerHTML = `<div >You are currently logged in as : ${name}</div>`;
 
 
 
@@ -99,10 +188,6 @@ n.innerHTML = `<div >You are currently logged in as : ${name}</div>`;
 
 
 
-
-function savetext(x) {
-    console.log(x)
-}
 
 
 document.querySelector(".prev").addEventListener("click", () => {
@@ -118,38 +203,144 @@ document.querySelector(".next").addEventListener("click", () => {
 renderCalendar();
 
 
-var name = "";
+
+
+
+
+//editting
+
+
+btns = document.getElementById("btns");
+
+btns.addEventListener("click", () => {
+
+
+
+
+    ch = document.getElementById("ch").checked;
+    cm = document.getElementById("cm").checked;
+    if (ch) {
+
+        if (!chd.includes("," + l + ",")) {
+            if (!cmd.includes("," + l + ",")) {
+
+                firebase.database().ref('Users/' + name + '/happpenClasses').set({
+                    happpenClasses: chd + "," + l + ","
+                });
+            } else {
+                document.getElementById("alert").style.display = "block";
+                p = document.getElementById("alertmessage");
+                p.innerHTML = "You first need to remove it form missed class";
+            }
+        } else {
+            document.getElementById("alert").style.display = "block";
+            p = document.getElementById("alertmessage");
+            p.innerHTML = "You have already added this class here";
+
+        }
+    } else {
+        if (!cmd.includes("," + l + ",")) {
+            if (chd.includes("," + l + ",")) {
+
+                chd = chd.replace("," + l + ",", "");
+                firebase.database().ref('Users/' + name + '/happpenClasses').set({
+                    happpenClasses: chd
+                });
+
+            }
+        }
+    }
+
+
+
+    if (cm) {
+        if (!cmd.includes("," + l + ",")) {
+            if (!chd.includes("," + l + ",")) {
+
+                firebase.database().ref('Users/' + name + '/MissedClasses').set({
+                    MissedClasses: cmd + "," + l + ","
+                });
+            } else {
+                document.getElementById("alert").style.display = "block";
+                p = document.getElementById("alertmessage");
+                p.innerHTML = "You first need to remove it form missed class";
+            }
+        } else {
+            document.getElementById("alert").style.display = "block";
+            p = document.getElementById("alertmessage");
+            p.innerHTML = "You have already added this class here";
+
+        }
+    } else {
+        if (!chd.includes("," + l + ",")) {
+            if (cmd.includes("," + l + ",")) {
+
+                cmd = cmd.replace("," + l + ",", "");
+                firebase.database().ref('Users/' + name + '/MissedClasses').set({
+                    MissedClasses: cmd
+                });
+
+            }
+        }
+    }
+
+
+    priceiv = document.getElementById("price").value;
+    if (priceiv != "" && priceiv != priced) {
+        firebase.database().ref('Users/' + name + '/Price').set({
+            Price: priceiv
+        });
+    }
+    renderCalendar();
+});
+
+//checkingchecbox
+function checkcheckbox1() {
+    document.getElementById("cm").checked = false
+
+
+}
+function checkcheckbox2() {
+    document.getElementById("ch").checked = false
+
+
+}
+
+
+
+
+
 //create
 btn = document.getElementById("signin");
+var name = "";
 btnc = document.getElementById("btnc");
+
 btnc.addEventListener("click", () => {
-    
+
     input = document.getElementById("btnt").value;
     var b = 0;
     if (input != "") {
         var dbref = firebase.database().ref().child('Users/' + input);
         dbref.on('value', (snapshot) => {
-           
+
             const data = snapshot.val();
-            console.log(data)
-            if (data != null&&b==0) {
+            if (data != null && b == 0) {
                 document.getElementById("alert").style.display = "block";
                 p = document.getElementById("alertmessage");
                 p.innerHTML = "This name already exist";
 
             } else {
-                b=1;
-                document.getElementById("sinin").style.display = "none";
-                document.getElementById("container").style.display = "flex";
-                console.log(input)
+                b = 1;
+                onlaunch();
                 name = input;
-                
+
+
                 firebase.database().ref('Users/' + input).set({
                     MissedClasses: "",
-                    happpenClasses:"",
-                    Price:""
+                    happpenClasses: "",
+                    Price: ""
                 });
-                
+
             }
 
         });
@@ -165,20 +356,18 @@ btnc.addEventListener("click", () => {
 
 //login
 btn.addEventListener("click", () => {
+    inputt = document.getElementById("value").value;
 
-    input = document.getElementById("value").value;
     var b = 0;
-    if (input != "") {
-        var dbref = firebase.database().ref().child('Users/' + input);
+    if (inputt != "") {
+        var dbref = firebase.database().ref().child('Users/' + inputt);
         dbref.on('value', (snapshot) => {
             const data = snapshot.val();
-            console.log(data)
             if (data != null) {
-                document.getElementById("sinin").style.display = "none";
-                document.getElementById("container").style.display = "flex";
-                renderCalendar();
-                console.log(input)
-                name = input;
+               
+                name = inputt;
+ onlaunch();
+
 
             } else {
                 document.getElementById("alert").style.display = "block";
@@ -218,8 +407,56 @@ dbref.once('value', (snapshot) => {
 function select() {
     var x = document.getElementById("mySelect").value;
     name = x
+    onlaunch();
+
+
+}
+
+function onlaunch() {
+    priced = ""
+    cmd = ""
+    chd = ""
     document.getElementById("sinin").style.display = "none";
     document.getElementById("container").style.display = "flex";
-    
+
+
+    pricei = document.getElementById("price")
+    var priceref = firebase.database().ref().child('Users/' + name + '/Price/Price');
+    priceref.on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data != null) {
+            pricei.value = data;
+            priced = data;
+            renderCalendar();
+        }
+
+    });
+    const n = document.querySelector(".name");
+    n.innerHTML = `<div class ="jeff" >${name}</div>`;
+
+
+    var chf = firebase.database().ref().child('Users/' + name + '/happpenClasses/happpenClasses');
+    chf.on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data != null) {
+            chd = data;
+            renderCalendar();
+        }
+
+    });
+    var chf = firebase.database().ref().child('Users/' + name + '/MissedClasses/MissedClasses');
+    chf.on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data != null) {
+            cmd = data;
+            renderCalendar();
+        }
+
+
+    });
+
+    renderCalendar();
+
 }
+
 
