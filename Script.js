@@ -305,9 +305,29 @@ function checkcheckbox2() {
 
 
 }
+btnb = document.getElementById("btnb");
+document.getElementById("help").style.display = "none";
+btnb.addEventListener("click", () => {
+    window.location='https://rehan2000.github.io/Classcounter/';
+  
+});
 
+btnhh = document.getElementById("btnhh");
 
+btnhh.addEventListener("click", () => {
+    document.getElementById("sinin").style.display = "none";
+    document.getElementById("container").style.display = "none";
+    document.getElementById("help").style.display = "inherit";
+  
+});
+btnh = document.getElementById("btnh");
 
+btnh.addEventListener("click", () => {
+    document.getElementById("sinin").style.display = "none";
+    document.getElementById("container").style.display = "none";
+    document.getElementById("help").style.display = "inherit";
+
+});
 
 
 //create
@@ -411,6 +431,13 @@ function select() {
 
 
 }
+document.getElementById("help").style.display = "none";
+
+
+
+
+
+
 
 function onlaunch() {
     priced = ""
@@ -418,6 +445,7 @@ function onlaunch() {
     chd = ""
     document.getElementById("sinin").style.display = "none";
     document.getElementById("container").style.display = "flex";
+    document.getElementById("help").style.display = "none";
 
 
     pricei = document.getElementById("price")

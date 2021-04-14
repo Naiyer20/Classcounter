@@ -273,6 +273,44 @@ textarea {
     margin: 0 10px;
 }
 
+.help{
+    color: white;
+    font-size: 2rem;
+    font-family: "Font Awesome 5 Free";
+    padding: 20px;
+    
+}
+
+.btnb {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 10%;
+    height:120px ;
+    font-size: 2rem;
+    background: none;
+    border: 2px solid #4caf50;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+    margin: 12px 0;
+}
+
+.btnh {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 10%;
+    height:120px ;
+    font-size: 2rem;
+    background: none;
+    border: 2px solid #4caf50;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+    margin: 12px 0;
+}
+
 
 .btn {
     width: 100%;

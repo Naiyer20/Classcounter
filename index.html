@@ -3,7 +3,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-
+    <script data-ad-client="ca-pub-8494920425145050" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <meta charset="utf-8" />
     <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-database.js"></script>
@@ -53,7 +53,70 @@
             </div>
             <input type="button" class="btnc" value="Create" id="btnc">
         </div>
+        <input type="button" class="btnh" value="HELP" id="btnh">
     </div>
+    <div class="help" id ="help">
+        <h1>
+            Welcome to Classcounter
+        </h1>
+        <br>
+        <h2>
+            login
+        </h2><br>
+        <p>
+            if you are a teacher : (ONLY ONE TIME) then create an username (bottom-right) for all your students then
+            tell the student his username. Be careful the uppercases in the username are meaningful so please give the
+            exact username to the according user.
+        </p>
+        <p> Afterwards sign in with the username from the drop down menu or type the exact username in the box
+
+        </p>
+
+        <p>
+            If you are a student : then your teacher has created a username for you. To sign in choose your username
+            from the drop down menu or type the exact username in the box(the teacher gave it to you normally)
+        </p><br>
+        <h2>
+            Classses
+        </h2><br>
+        <h3>
+            Class that happened
+        </h3>
+        <p>
+            To add a class which happened : example this saturday 1) select that date on the calandar 2) then put a
+            check next to the checkbox class happened 3) press save very important
+        </p>
+        <p> To remove a class which did not happen : example you pressed the wrong date 1) select that date on the
+            calandar 2) then remove the check next to the checkbox class happened 3) press save very important
+        </p>
+        <h3>
+            Class that were missed
+        </h3>
+
+        <p>
+            To add a class which was missed : 1) select that date on the calandar 2) then put a check next to the
+            checkbox class missed 3) press save very important
+        </p>
+        <p> To remove a class which did not happen : example you pressed the wrong date 1) select that date on the
+            calandar 2) then remove the check next to the checkbox class missed 3) press save very important
+        </p>
+        <br>
+        <h2>
+            Price
+        </h2>
+        <p>
+            Enter the price for ONLY ONE CLASS in the price section. The price will be in rupees. Nothing happens with
+            miss classes. Caculation = Class happened times price
+        </p>
+        <input type="button" class="btnb" value="Back" id="btnb">
+    </div>
+
+
+
+
+
+
+
 
     <div id="container" class="container">
         <div class="calendar">
@@ -78,6 +141,7 @@
 
         </div>
         <div class="editor">
+            <input type="button" class="btnh" value="HELP" id="btnhh">
             <div class="editor">
                 <br>
                 Editor
