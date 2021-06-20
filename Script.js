@@ -446,15 +446,27 @@ function onlaunch() {
     document.getElementById("sinin").style.display = "none";
     document.getElementById("container").style.display = "flex";
     document.getElementById("help").style.display = "none";
-
+    x=0;
 
     pricei = document.getElementById("price")
     var priceref = firebase.database().ref().child('Users/' + name + '/Price/Price');
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
-            pricei.value = data;
-            priced = data;
+            x=x+data;
+            pricei.value = x;
+            priced = x;
+            renderCalendar();
+        }
+
+    });
+    var priceref = firebase.database().ref().child('Users/' + name + '/Price/Price');
+    priceref.on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data != null) {
+            x=x+data;
+            pricei.value = x;
+            priced = x;
             renderCalendar();
         }
 
