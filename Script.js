@@ -449,7 +449,7 @@ function onlaunch() {
     x=0;
 
     pricei = document.getElementById("price")
-    var priceref = firebase.database().ref().child('Users/' + name + '/Price/Price');
+    var priceref = firebase.database().ref().child('Users/Farhan/Price/Price');
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
@@ -460,7 +460,7 @@ function onlaunch() {
         }
 
     });
-    var priceref = firebase.database().ref().child('Users/' + name + '/Price/Price');
+    var priceref = firebase.database().ref().child('Users/Rehan/Price/Price');
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
