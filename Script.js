@@ -454,7 +454,7 @@ function onlaunch() {
         const data = snapshot.val();
         if (data != null) {
             x=parseInt(x)+parseInt(data);
-            pricei.value = x;
+            pricei.value = data;
             priced = x;
             renderCalendar();
         }
@@ -465,7 +465,7 @@ function onlaunch() {
         const data = snapshot.val();
         if (data != null) {
             x=parseInt(x)+parseInt(data);
-            pricei.value = x;
+            pricei.value = data;
             priced = x;
             renderCalendar();
         }
