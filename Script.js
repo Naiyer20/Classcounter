@@ -453,7 +453,7 @@ function onlaunch() {
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
-            x=int(x)+int(data);
+            x=parseInt(x)+parseInt(data);
             pricei.value = x;
             priced = x;
             renderCalendar();
@@ -464,7 +464,7 @@ function onlaunch() {
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
-            x=int(x)+int(data);
+            x=parseInt(x)+parseInt(data);
             pricei.value = x;
             priced = x;
             renderCalendar();
