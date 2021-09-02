@@ -158,6 +158,7 @@ const renderCalendar = () => {
 
     cho.innerHTML = `<div class="h"> ${k} classes</div>`
     cmo.innerHTML = `<div class="h"> ${p} classes</div>`
+    console.log(pricedr , k , pricedf)
     priceo.innerHTML = `<div class="h"> ${pricedr * k + pricedf} rupees</div>`
 
 
