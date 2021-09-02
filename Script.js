@@ -458,23 +458,24 @@ function onlaunch() {
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
-            console.log(parseInt(x),parseInt(data))
             x=parseInt(x)+parseInt(data);
             pricedf = x;
         }
 
     });
+    
+    x=0;
     var priceref = firebase.database().ref().child('Users/Rehan/Price/Price');
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
-            console.log(parseInt(x),parseInt(data))
             x=parseInt(x)+parseInt(data);
             pricedr = x;
         }
 
     });
     
+    x=0;
     
     var priceref = firebase.database().ref().child('Users/' + name + '/Price/Price');
     priceref.on('value', (snapshot) => {
