@@ -458,7 +458,8 @@ function onlaunch() {
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
-            x=parseInt(x)+parseInt(data);
+            console.log(data)
+            x=parseInt(data);
             pricedf = x;
         }
 
@@ -469,19 +470,19 @@ function onlaunch() {
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
-            x=parseInt(x)+parseInt(data);
+            console.log(data)
+            x=parseInt(data);
             pricedr = x;
         }
 
     });
     
-    x=0;
     
     var priceref = firebase.database().ref().child('Users/' + name + '/Price/Price');
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
-            x=parseInt(x)+parseInt(data);
+            x=parseInt(data);
             pricei.value = data;
             priced = x;
             renderCalendar();
