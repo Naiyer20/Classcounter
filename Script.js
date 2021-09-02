@@ -14,6 +14,8 @@ var database = firebase.database();
 priced = ""
 cmd = ""
 chd = ""
+chdr= ""
+chdf= ""
 pricedf = ""
 pricedr = ""
 // JavaScript source code
@@ -130,15 +132,31 @@ const renderCalendar = () => {
     priceo = document.getElementById("priceforall");
     var cha = chd.split(',');
     cha.pop(0);
+
+    var char = chdr.split(',');
+    char.pop(0)
+    var chaf = chdf.split(',');
+    chaf.pop(0)
+
     var cma = cmd.split(',');
     cma.pop(0);
     cha = cha.filter(el => {
         return el != null && el != '';
     });
+    
+    chaf = chaf.filter(el => {
+        return el != null && el != '';
+    });
+    char = char.filter(el => {
+        return el != null && el != '';
+    });
+
     cma = cma.filter(el => {
         return el != null && el != '';
     });
     k = 0;
+    kr=0
+    kf=0
     p = 0;
     for (i = 0; i < cma.length; i++) {
         var la = cma[i].split('/');
@@ -155,11 +173,28 @@ const renderCalendar = () => {
         }
 
     }
+    for (i = 0; i < chaf.length; i++) {
+        var la = chaf[i].split('/');
+        if (la[1] == date.getMonth() && la[2] == date.getFullYear()) {
+            kf++
+        }
+
+    }
+    for (i = 0; i < char.length; i++) {
+        var la = char[i].split('/');
+        if (la[1] == date.getMonth() && la[2] == date.getFullYear()) {
+            kr++
+        }
+
+    }
+
+
 
     cho.innerHTML = `<div class="h"> ${k} classes</div>`
     cmo.innerHTML = `<div class="h"> ${p} classes</div>`
     console.log(pricedr , k , pricedf)
-    priceo.innerHTML = `<div class="h"> ${pricedr * k + pricedf} rupees</div>`
+    //priceo.innerHTML = `<div class="h"> ${priced * k} rupees</div>`
+    priceo.innerHTML = `<div class="h"> ${pricedr * kr + pricedf*kf} rupees</div>`
 
 
 
@@ -447,6 +482,8 @@ function onlaunch() {
     pricedr = ""
     cmd = ""
     chd = ""
+    chdr= ""
+    chdf= ""
     document.getElementById("sinin").style.display = "none";
     document.getElementById("container").style.display = "flex";
     document.getElementById("help").style.display = "none";
@@ -505,6 +542,26 @@ function onlaunch() {
         }
 
     });
+    
+    var chf = firebase.database().ref().child('Users/Rehan/happpenClasses/happpenClasses');
+    chf.on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data != null) {
+            chdr = data;
+            renderCalendar();
+        }
+
+    });
+    
+    var chf = firebase.database().ref().child('Users/Farhan/happpenClasses/happpenClasses');
+    chf.on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data != null) {
+            chdf = data;
+            renderCalendar();
+        }
+
+    });
     var chf = firebase.database().ref().child('Users/' + name + '/MissedClasses/MissedClasses');
     chf.on('value', (snapshot) => {
         const data = snapshot.val();
@@ -519,5 +576,6 @@ function onlaunch() {
     renderCalendar();
 
 }
+
 
 
