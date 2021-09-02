@@ -14,7 +14,8 @@ var database = firebase.database();
 priced = ""
 cmd = ""
 chd = ""
-
+pricedf = ""
+pricedr = ""
 // JavaScript source code
 const date = new Date();
 
@@ -157,7 +158,7 @@ const renderCalendar = () => {
 
     cho.innerHTML = `<div class="h"> ${k} classes</div>`
     cmo.innerHTML = `<div class="h"> ${p} classes</div>`
-    priceo.innerHTML = `<div class="h"> ${priced * k} rupees</div>`
+    priceo.innerHTML = `<div class="h"> ${pricedr * k + pricedf} rupees</div>`
 
 
 
@@ -441,6 +442,8 @@ document.getElementById("help").style.display = "none";
 
 function onlaunch() {
     priced = ""
+    pricedf = ""
+    pricedr = ""
     cmd = ""
     chd = ""
     document.getElementById("sinin").style.display = "none";
@@ -449,14 +452,13 @@ function onlaunch() {
     x=0;
 
     pricei = document.getElementById("price")
+    
     var priceref = firebase.database().ref().child('Users/Farhan/Price/Price');
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
             x=parseInt(x)+parseInt(data);
-            pricei.value = data;
-            priced = x;
-            renderCalendar();
+            pricedf = x;
         }
 
     });
@@ -465,12 +467,26 @@ function onlaunch() {
         const data = snapshot.val();
         if (data != null) {
             x=parseInt(x)+parseInt(data);
+            pricedr = x;
+        }
+
+    });
+    
+    
+    var priceref = firebase.database().ref().child('Users/' + name + '/Price/Price');
+    priceref.on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data != null) {
+            x=parseInt(x)+parseInt(data);
             pricei.value = data;
             priced = x;
             renderCalendar();
         }
 
     });
+    
+    
+    
     const n = document.querySelector(".name");
     n.innerHTML = `<div class ="jeff" >${name}</div>`;
 
