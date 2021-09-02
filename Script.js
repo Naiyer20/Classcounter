@@ -458,6 +458,7 @@ function onlaunch() {
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
+            console.log(parseInt(x),parseInt(data))
             x=parseInt(x)+parseInt(data);
             pricedf = x;
         }
@@ -467,6 +468,7 @@ function onlaunch() {
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
+            console.log(parseInt(x),parseInt(data))
             x=parseInt(x)+parseInt(data);
             pricedr = x;
         }
