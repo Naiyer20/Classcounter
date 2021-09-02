@@ -192,7 +192,6 @@ const renderCalendar = () => {
 
     cho.innerHTML = `<div class="h"> ${k} classes</div>`
     cmo.innerHTML = `<div class="h"> ${p} classes</div>`
-    console.log(pricedr , k , pricedf)
     //priceo.innerHTML = `<div class="h"> ${priced * k} rupees</div>`
     priceo.innerHTML = `<div class="h"> ${pricedr * kr + pricedf*kf} rupees</div>`
 
@@ -495,7 +494,6 @@ function onlaunch() {
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
-            console.log(data)
             x=parseInt(data);
             pricedf = x;
         }
@@ -507,7 +505,6 @@ function onlaunch() {
     priceref.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data != null) {
-            console.log(data)
             x=parseInt(data);
             pricedr = x;
         }
